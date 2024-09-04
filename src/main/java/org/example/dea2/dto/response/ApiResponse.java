@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.example.dea2.entity.BidEntity;
+import org.example.dea2.entity.FeedbackEntity;
 import org.example.dea2.entity.VehicleEntity;
 import org.example.dea2.entity.UserDetailsEntity;
 
@@ -21,4 +22,6 @@ public class ApiResponse extends Response {
     private List<BidEntity> bidData;
     private List<UserDetailsEntity> userDetailsList;
     private List<VehicleEntity> vehicleDetailsList;
+    private List<FeedbackEntity> feedbackList;
+
 }

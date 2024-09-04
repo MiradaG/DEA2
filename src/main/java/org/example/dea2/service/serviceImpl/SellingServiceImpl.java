@@ -1,12 +1,12 @@
 package org.example.dea2.service.serviceImpl;
 
+import org.example.dea2.repository.SellingAddRepository;
+import org.example.dea2.service.SellingService;
 import org.example.dea2.dto.request.SellingAddApiRequest;
 import org.example.dea2.dto.response.ApiResponse;
 import org.example.dea2.entity.VehicleEntity;
 import org.example.dea2.entity.UserDetailsEntity;
-import org.example.dea2.repository.SellingAddRepository;
 import org.example.dea2.repository.UserRepository;
-import org.example.dea2.service.SellingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

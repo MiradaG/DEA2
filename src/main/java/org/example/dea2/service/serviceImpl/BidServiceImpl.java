@@ -1,11 +1,11 @@
 package org.example.dea2.service.serviceImpl;
 
+import org.example.dea2.repository.BidRepository;
 import org.example.dea2.dto.request.BidApiRequest;
 import org.example.dea2.dto.response.ApiResponse;
 import org.example.dea2.entity.BidEntity;
 import org.example.dea2.entity.UserDetailsEntity;
 import org.example.dea2.entity.VehicleEntity;
-import org.example.dea2.repository.BidRepository;
 import org.example.dea2.repository.SellingAddRepository;
 import org.example.dea2.repository.UserRepository;
 import org.example.dea2.service.BidService;

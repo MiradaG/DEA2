@@ -1,6 +1,5 @@
 package org.example.dea2.repository;
 
-import com.sun.jdi.IntegerType;
 import org.example.dea2.entity.UserDetailsEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
