@@ -11,7 +11,6 @@ import org.example.dea2.dto.response.ApiResponse;
 public interface UserService {
 
     /**
-
      * This method will take a SignUpApiRequest object that contains user information,
      * such as name, email, and password, and return an ApiResponse.
      * @return ApiResponse indicating success or failure of the registration process
