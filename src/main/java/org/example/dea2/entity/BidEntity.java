@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Entity
 @Data
-
+//define the BidEntity
 public class BidEntity {
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -22,7 +22,5 @@ public class BidEntity {
     private BigDecimal bidAmount;
     private int sellingId;
     private Date bidDate;
-
-
 
 }
