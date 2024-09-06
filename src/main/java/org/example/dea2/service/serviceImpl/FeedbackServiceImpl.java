@@ -12,51 +12,63 @@ import java.util.List;
 
 @Service
 public class FeedbackServiceImpl implements FeedbackService {
-    @Autowired
+
+    @Autowired  // Automatically injects the FeedbackRepository instance
     FeedbackRepository feedbackRepository;
+
+    // Implementation of the save method to handle feedback submission
     @Override
-
     public ApiResponse save(FeedbackApiRequest request) {
-        ApiResponse response = new ApiResponse();
+        ApiResponse response = new ApiResponse();  // Create a new API response object
 
-        try{
+        try {
+            // Create a new FeedbackEntity and set its properties from the request object
             FeedbackEntity feedback = new FeedbackEntity();
             feedback.setFeedback(request.getFeedback());
             feedback.setStarValue(request.getStarValue());
             feedback.setUserName(request.getUserName());
             feedback.setUserId(request.getUserId());
+
+            // Save the feedback entity to the database
             feedbackRepository.save(feedback);
+
+            // If successful, set the response message and status to indicate success
             response.setMessage("Success");
             response.setStatus(200);
 
+        } catch (Exception e) {
 
-        }
-        catch(Exception e){
-            response.setMessage("error" + e.getMessage());
+            response.setMessage("Error: " + e.getMessage());
             response.setStatus(404);
         }
+
 
         return response;
     }
 
+    // Implementation of the view method to retrieve all feedback entries
     @Override
     public ApiResponse view() {
-        ApiResponse response = new ApiResponse();
+        ApiResponse response = new ApiResponse();  // Create a new API response object
 
-        try{
-           List<FeedbackEntity> feedbackList = feedbackRepository.findAll();
-           response.setFeedbackList(feedbackList);
+        try {
 
+            List<FeedbackEntity> feedbackList = feedbackRepository.findAll();
 
+            // Add the list of feedback to the response
+            response.setFeedbackList(feedbackList);
+
+            // If successful, set the response message and status to indicate success
             response.setMessage("Success");
             response.setStatus(200);
 
-
-        }
-        catch(Exception e){
-            response.setMessage("error" + e.getMessage());
+        } catch (Exception e) {
+            // If an error occurs, catch the exception and set an error message and status
+            response.setMessage("Error: " + e.getMessage());
             response.setStatus(404);
         }
+
+
         return response;
     }
 }
