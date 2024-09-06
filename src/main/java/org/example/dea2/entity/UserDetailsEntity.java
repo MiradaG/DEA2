@@ -13,9 +13,14 @@ public class UserDetailsEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     private String email;
+
     @JsonIgnore
     private String password;
-    private String Name;
 
+    private String name;
+
+    // Add the userId field
+    private int userId;
 }

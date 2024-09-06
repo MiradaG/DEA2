@@ -44,10 +44,10 @@ public class UserServiceImpl implements UserService {
             userSave.setEmail(request.getEmail());
 
             // Save the user to the database.
-            userRepository.save(userSave);
+            userSave = userRepository.save(userSave);
 
-            // Set the response data and message.
-            response.setUserData(userSave);
+            // Set the response data and message, including the userId.
+            response.setUserData(userSave); // Ensure user data includes userId
             response.setMessage("User registered successfully");
             response.setStatus(200);
 
@@ -79,6 +79,7 @@ public class UserServiceImpl implements UserService {
                 if (bCryptPasswordEncoder.matches(request.getPassword(), user.getPassword())) {
                     response.setMessage("Login successful");
                     response.setStatus(200);
+                    response.setUserData(user); // Ensure user data includes userId
                 } else {
                     response.setMessage("Login failed");
                     response.setStatus(400);

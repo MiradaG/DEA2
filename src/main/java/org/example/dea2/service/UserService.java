@@ -11,17 +11,24 @@ import org.example.dea2.dto.response.ApiResponse;
 public interface UserService {
 
     /**
-
-     * This method will take a SignUpApiRequest object that contains user information,
-     * such as name, email, and password, and return an ApiResponse.
+     * Handles user registration.
+     * This method takes a SignUpApiRequest object that contains user information,
+     * such as name, email, and password, and returns an ApiResponse.
+     * The response may include user details including the userId.
+     *
+     * @param request the sign-up request containing user details (name, email, password)
      * @return ApiResponse indicating success or failure of the registration process
      */
     ApiResponse userSignUp(SignUpApiRequest request);
 
     /**
-
-     * This method will take a LoginApiRequest object that contains the user's email
-     * and password, and return an ApiResponse.
+     * Handles user login.
+     * This method takes a LoginApiRequest object that contains the user's email
+     * and password, and returns an ApiResponse.
+     * The response will indicate whether the login was successful, and may include
+     * user details including the userId.
+     *
+     * @param request the login request containing email and password
      * @return ApiResponse indicating success or failure of the login process
      */
     ApiResponse userLogin(LoginApiRequest request);

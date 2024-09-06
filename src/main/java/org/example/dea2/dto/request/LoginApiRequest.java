@@ -2,13 +2,10 @@ package org.example.dea2.dto.request;
 
 import lombok.Data;
 
-
-@Data // Lombok annotation to automatically generate getter, setter, equals, hashCode, and toString methods.
+@Data
 public class LoginApiRequest {
 
-
-    private String email;
-
-
-    private String password;
+    private String email;     // Email of the user
+    private String password;  // Password of the user
+    private int userId;       // Unique identifier of the user
 }
