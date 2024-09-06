@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
-
+// Creates class as a service component
 @Service
 public class BidServiceImpl implements BidService {
     @Autowired
@@ -28,6 +28,7 @@ public class BidServiceImpl implements BidService {
 
     @Override
     public ApiResponse save(BidApiRequest request) {
+        // Response object to send back to the client
         ApiResponse response = new ApiResponse();
 
         try{
@@ -36,11 +37,14 @@ public class BidServiceImpl implements BidService {
             bid.setBidDate(new Date());
             bid.setSellingId(request.getSellingId());
             bid.setUserId(request.getUserId());
+            //save bids to the DB
             bidRepository.save(bid);
+            //set sucess messages
             response.setMessage("Success");
             response.setStatus(200);
 
         }
+        //exception handle
         catch (Exception e){
             response.setMessage("Error "+e.getMessage());
             response.setStatus(400);
@@ -57,8 +61,9 @@ public class BidServiceImpl implements BidService {
         ApiResponse response = new ApiResponse();
 
       try{
+          // Fetch all bids from the database.
           List<BidEntity> bids = bidRepository.findAll();
-
+          // Extract userIds from the bids
           List<Integer> userIds = bids.stream()
                   .map(BidEntity::getUserId)
                   .collect(Collectors.toList());
