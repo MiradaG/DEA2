@@ -1,5 +1,7 @@
 package org.example.dea2.dto.response;
 
+
+// Importing necessary packages and classes
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,7 +19,9 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ApiResponse extends Response {
     private UserDetailsEntity userData;
-    private String imageName;
+    private String imageName; /**
+     * List of vehicles related to the response.
+     */
     private List<VehicleEntity> vehicleList;
     private List<BidEntity> bidData;
     private List<UserDetailsEntity> userDetailsList;
