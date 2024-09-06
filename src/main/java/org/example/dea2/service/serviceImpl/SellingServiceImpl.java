@@ -13,19 +13,26 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
-@Service
+
+
+@Service // Marks this class as a service component in the Spring context
 public class SellingServiceImpl implements SellingService {
-    @Autowired
-    private SellingAddRepository sellingAddRepository;
-    @Autowired
-    private UserRepository userRepository;
 
+    @Autowired
+    private SellingAddRepository sellingAddRepository; // Repository for vehicle-related operations
 
+    @Autowired
+    private UserRepository userRepository; // Repository for user-related operations
+
+    //Adds a new vehicle listing if the user exists in the system.
     @Override
     public ApiResponse add(SellingAddApiRequest request) {
         Optional<UserDetailsEntity> byId = userRepository.findById(request.getUserId());
         ApiResponse response = new ApiResponse();
-        if(byId.isPresent()) {
+
+        // Check if the user exists
+        if (byId.isPresent()) {
+            // Create and populate VehicleEntity with data from the request
             VehicleEntity vehicleEntity = new VehicleEntity();
             vehicleEntity.setBidAmount(request.getBidAmount());
             vehicleEntity.setUser(byId.get());
@@ -36,41 +43,39 @@ public class SellingServiceImpl implements SellingService {
             vehicleEntity.setVehicleName(request.getVehicleName());
             vehicleEntity.setImagePath(request.getImagePath());
 
+            // Save the vehicle data
             sellingAddRepository.save(vehicleEntity);
             response.setMessage("Successfully saved the vehicle");
             response.setStatus(200);
-            return  response;
+            return response;
         }
-
-
-
-
 
         response.setMessage("Failed to list the vehicle");
         response.setStatus(400);
-
-
-
-
         return response;
     }
 
+    //Retrieves all vehicle listings from the repository.
     @Override
     public ApiResponse get() {
         List<VehicleEntity> all = sellingAddRepository.findAll();
-        System.out.printf(all.toString());
+        System.out.println(all.toString()); // Debugging output
+
         ApiResponse response = new ApiResponse();
         response.setStatus(200);
-        response.setVehicleList(all);
+        response.setVehicleList(all); // Set the retrieved vehicle list in the response
         return response;
     }
 
+    //Deletes a vehicle listing based on its ID.
     @Override
     public ApiResponse delete(String vehicleId) {
         Optional<VehicleEntity> byId = sellingAddRepository.findById(Integer.valueOf(vehicleId));
-        System.out.printf(byId.toString());
+        System.out.println(byId.toString()); // Debugging output
+
         ApiResponse response = new ApiResponse();
-        if(byId.isPresent()) {
+        if (byId.isPresent()) {
+            // Delete the vehicle if found
             sellingAddRepository.delete(byId.get());
             response.setMessage("Successfully deleted the vehicle");
             response.setStatus(200);
@@ -81,11 +86,14 @@ public class SellingServiceImpl implements SellingService {
         return response;
     }
 
+    //Updates an existing vehicle listing if found in the repository.
     @Override
     public ApiResponse update(SellingAddApiRequest request) {
         Optional<VehicleEntity> byId = sellingAddRepository.findById(request.getVehicleId());
         ApiResponse response = new ApiResponse();
-        if(byId.isPresent()) {
+
+        if (byId.isPresent()) {
+            // Update the vehicle entity with new values
             VehicleEntity vehicleEntity = byId.get();
             vehicleEntity.setBidAmount(request.getBidAmount());
             vehicleEntity.setDescription(request.getDescription());
@@ -94,8 +102,9 @@ public class SellingServiceImpl implements SellingService {
             vehicleEntity.setStartDate(request.getStartDate());
             vehicleEntity.setVehicleName(request.getVehicleName());
             vehicleEntity.setImagePath(request.getImagePath());
-            sellingAddRepository.save(vehicleEntity);
 
+            // Save the updated vehicle data
+            sellingAddRepository.save(vehicleEntity);
             response.setMessage("Successfully updated the vehicle");
             response.setStatus(200);
             return response;
