@@ -4,7 +4,8 @@ import org.example.dea2.entity.VehicleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository
+
+@Repository // Indicates that this interface is a repository that interacts with the database
 public interface SellingAddRepository extends JpaRepository<VehicleEntity, Integer> {
 
 }
