@@ -1,0 +1,122 @@
+openapi: 3.0.0
+info:
+  title: Combined API Specification
+  version: 1.0.0
+paths:
+  /api/v1/selling/add:
+    post:
+      summary: Add a new vehicle for selling
+      description: Adds a new vehicle to the selling list.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SellingAddApiRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid input
+        '500':
+          description: Internal server error
+  /api/v1/selling/get:
+    get:
+      summary: Retrieve all vehicles for selling
+      description: Retrieves a list of all vehicles available for selling.
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SellingAddApiRequest'
+        '500':
+          description: Internal server error
+  /api/v1/selling/delete/{vehicleId}:
+    delete:
+      summary: Delete a vehicle by ID
+      description: Deletes a vehicle from the selling list based on its ID.
+      parameters:
+      - name: vehicleId
+        in: path
+        required: true
+        description: ID of the vehicle to delete
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '404':
+          description: Vehicle not found
+        '500':
+          description: Internal server error
+  /api/v1/selling/update:
+    put:
+      summary: Update vehicle information
+      description: Updates the information of a vehicle in the selling list.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SellingAddApiRequest'
+      responses:
+        '200':
+          description: Successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponse'
+        '400':
+          description: Invalid input
+        '404':
+          description: Vehicle not found
+        '500':
+          description: Internal server error
+components:
+  schemas:
+    SellingAddApiRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Vehicle ID
+        model:
+          type: string
+          description: Vehicle model
+        make:
+          type: string
+          description: Vehicle make
+        year:
+          type: integer
+          description: Vehicle manufacturing year
+        price:
+          type: number
+          format: float
+          description: Vehicle price
+      description: Request body for adding or updating vehicle information.
+    ApiResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          description: Status of the response
+        message:
+          type: string
+          description: Message of the response
+        data:
+          type: object
+          description: Data returned in the response
+          nullable: true
+      description: Generic API response format.
